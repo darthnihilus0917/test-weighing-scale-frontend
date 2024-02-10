@@ -31,7 +31,7 @@ const WebSocketClient = () => {
   return (
     <div>
       {weight !== null ? (
-        <p>Weight: {weight.toFixed(2)}</p>
+        <p style={{ 'color': (weight > 1 ) ? 'green' : 'red' }}>Weight: {weight.toFixed(2)}</p>
       ) : (
         <p>Waiting for weight...</p>
       )}
