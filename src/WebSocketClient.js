@@ -3,6 +3,7 @@ import WebSocket from 'websocket';
 
 const WebSocketClient = () => {
   const [weight, setWeight] = useState(null);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const wsUrl = 'ws://localhost:3001';
@@ -10,7 +11,9 @@ const WebSocketClient = () => {
     const ws = new WebSocket.w3cwebsocket(wsUrl);
 
     ws.onopen = () => {
-      console.log('Connected to WebSocket server');
+        const msg = 'Connected to WebSocket server';
+        setMessage(msg);
+        console.log(msg);
     };
 
     ws.onmessage = message => {
@@ -20,7 +23,9 @@ const WebSocketClient = () => {
     };
 
     ws.onclose = () => {
-      console.log('Disconnected from WebSocket server');
+        const msg = 'Disconnected from WebSocket server';
+        setMessage(msg);
+        console.log(msg);
     };
 
     return () => {
@@ -31,10 +36,11 @@ const WebSocketClient = () => {
   return (
     <div>
       {weight !== null ? (
-        <p style={{ 'color': (weight > 1 ) ? 'green' : 'red' }}>Weight: {weight.toFixed(2)}</p>
+        <p style={{ color: (weight > 1 ) ? 'green' : 'red', fontWeight: 'bold' }}>Weight: {weight.toFixed(2)}</p>
       ) : (
-        <p>Waiting for weight...</p>
+        <p style={{ fontWeight: 'bold' }}>Waiting for weight...</p>
       )}
+      <p>{message}</p>
     </div>
   );
 };
